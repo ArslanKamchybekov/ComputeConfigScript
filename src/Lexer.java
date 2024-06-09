@@ -33,6 +33,7 @@ public class Lexer implements Iterable<Lexer.Token> {
                 case '-':
                 case '*':
                 case '/':
+                case '>':
                     tokens.add(new Token(TokenType.OPERATOR, Character.toString(c)));
                     current++;
                     break;
@@ -62,6 +63,8 @@ public class Lexer implements Iterable<Lexer.Token> {
             case "configs" -> TokenType.CONFIGS;
             case "compute" -> TokenType.COMPUTE;
             case "show" -> TokenType.SHOW;
+            case "loop", "from" -> TokenType.LOOP;
+            case "if", "else" -> TokenType.CONDITION;
             default -> TokenType.IDENTIFIER;
         };
     }
@@ -139,6 +142,6 @@ public class Lexer implements Iterable<Lexer.Token> {
         }
     }
     enum TokenType{
-        CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, NUMBER, IDENTIFIER, REFERENCES, OPERATOR, ASSIGNMENT
+        CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, NUMBER, IDENTIFIER, REFERENCES, OPERATOR, ASSIGNMENT, LOOP, CONDITION
     }
 }
