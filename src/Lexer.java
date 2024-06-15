@@ -30,11 +30,32 @@ public class Lexer implements Iterable<Lexer.Token> {
                     current++;
                     break;
                 case '+':
+                    tokens.add(new Token(TokenType.ADD, "+"));
+                    current++;
+                    break;
                 case '-':
+                    tokens.add(new Token(TokenType.SUBTRACT, "-"));
+                    current++;
+                    break;
                 case '*':
+                    tokens.add(new Token(TokenType.MULTIPLY, "*"));
+                    current++;
+                    break;
                 case '/':
+                    tokens.add(new Token(TokenType.DIVIDE, "/"));
+                    current++;
+                    break;
                 case '>':
+                case '<':
                     tokens.add(new Token(TokenType.OPERATOR, Character.toString(c)));
+                    current++;
+                    break;
+                case '(':
+                    tokens.add(new Token(TokenType.LPAREN, "("));
+                    current++;
+                    break;
+                case ')':
+                    tokens.add(new Token(TokenType.RPAREN, ")"));
                     current++;
                     break;
                 case '"':
@@ -135,13 +156,11 @@ public class Lexer implements Iterable<Lexer.Token> {
 
         @Override
         public String toString() {
-            return "Token{" +
-                    "tokenType=" + tokenType +
-                    ", value='" + value + '\'' +
-                    '}';
+            return "Token{" + "tokenType=" + tokenType + ", value='" + value + '\'' + '}';
         }
     }
     enum TokenType{
-        CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, NUMBER, IDENTIFIER, REFERENCES, OPERATOR, ASSIGNMENT, LOOP, CONDITION
+        CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, NUMBER, IDENTIFIER, REFERENCES, ASSIGNMENT, LOOP, CONDITION,
+        OPERATOR, ADD, SUBTRACT, MULTIPLY, DIVIDE, LPAREN, RPAREN
     }
 }
