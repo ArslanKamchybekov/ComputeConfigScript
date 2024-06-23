@@ -26,7 +26,7 @@ public class Lexer implements Iterable<Lexer.Token> {
                     current++;
                     break;
                 case '=':
-                    tokens.add(new Token(TokenType.ASSIGNMENT, "="));
+                    tokens.add(new Token(TokenType.ASSIGN, "="));
                     current++;
                     break;
                 case '+':
@@ -58,6 +58,18 @@ public class Lexer implements Iterable<Lexer.Token> {
                     tokens.add(new Token(TokenType.RPAREN, ")"));
                     current++;
                     break;
+                case '{':
+                    tokens.add(new Token(TokenType.LBRACE, "{"));
+                    current++;
+                    break;
+                case '}':
+                    tokens.add(new Token(TokenType.RPAREN, "}"));
+                    current++;
+                    break;
+                case ';':
+                    tokens.add(new Token(TokenType.SEMICOLON, ";"));
+                    current++;
+                    break;
                 case '"':
                     tokens.add(new Token(TokenType.STRING, readString()));
                     current++;
@@ -81,6 +93,7 @@ public class Lexer implements Iterable<Lexer.Token> {
         return switch (identifier) {
             case "config" -> TokenType.CONFIG;
             case "update" -> TokenType.UPDATE;
+            case "var" -> TokenType.VAR;
             case "configs" -> TokenType.CONFIGS;
             case "compute" -> TokenType.COMPUTE;
             case "show" -> TokenType.SHOW;
@@ -145,9 +158,9 @@ public class Lexer implements Iterable<Lexer.Token> {
         return tokens.iterator();
     }
 
-    class Token{
-        final TokenType tokenType;
-        final String value;
+    public class Token{
+        public final TokenType tokenType;
+        public final String value;
 
         public Token(TokenType tokenType, String value) {
             this.tokenType = tokenType;
@@ -160,7 +173,7 @@ public class Lexer implements Iterable<Lexer.Token> {
         }
     }
     enum TokenType{
-        CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, NUMBER, IDENTIFIER, REFERENCES, ASSIGNMENT, LOOP, CONDITION,
-        OPERATOR, ADD, SUBTRACT, MULTIPLY, DIVIDE, LPAREN, RPAREN
+        CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, NUMBER, IDENTIFIER, REFERENCES, ASSIGN, LOOP, CONDITION,
+        OPERATOR, ADD, SUBTRACT, MULTIPLY, DIVIDE, LPAREN, RPAREN, SEMICOLON, LBRACE, RBRACE, VAR
     }
 }

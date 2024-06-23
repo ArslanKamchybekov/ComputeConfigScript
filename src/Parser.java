@@ -1,3 +1,6 @@
+import ast.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
@@ -12,7 +15,48 @@ public class Parser {
     }
 
     public ASTNode parse(){
+        List<ASTNode> statements = new ArrayList<>();
+        while(currentToken != null){
+            statements.add(statement());
+            if(currentToken.tokenType == Lexer.TokenType.SEMICOLON) consume(currentToken.tokenType);
+        }
+        return new BlockNode(statements);
+    }
+
+    private ASTNode statement() {
+        if(currentToken.tokenType == Lexer.TokenType.LBRACE) return block();
+        if(currentToken.tokenType == Lexer.TokenType.VAR) return declaration();
+        if(currentToken.tokenType == Lexer.TokenType.IDENTIFIER) return assignment();
         return expression();
+    }
+
+    private ASTNode assignment() {
+        VarNode var = var();
+        consume(Lexer.TokenType.ASSIGN);
+        return new AssignNode(var, expression());
+    }
+
+    private ASTNode declaration() {
+        consume(Lexer.TokenType.VAR);
+        VarNode var = var();
+        consume(Lexer.TokenType.ASSIGN);
+        return new DeclarationNode(var, expression());
+    }
+
+    private VarNode var() {
+        consume(Lexer.TokenType.IDENTIFIER);
+        return new VarNode(currentToken);
+    }
+
+    private ASTNode block() {
+        consume(Lexer.TokenType.LBRACE);
+        ArrayList<ASTNode> statements = new ArrayList<>();
+        while(currentToken != null && currentToken.tokenType != Lexer.TokenType.RBRACE){
+            statements.add(statement());
+            if(currentToken != null && currentToken.tokenType == Lexer.TokenType.SEMICOLON) consume(currentToken.tokenType);
+        }
+        consume(Lexer.TokenType.RBRACE);
+        return new BlockNode(statements);
     }
 
     private ASTNode expression() {
@@ -21,11 +65,11 @@ public class Parser {
             Lexer.Token token = currentToken;
 //            if (currentToken.tokenType == Lexer.TokenType.ADD || currentToken.tokenType == Lexer.TokenType.SUBTRACT) {
 //                consume(currentToken.tokenType);
-//                node = new BinaryOperationNode(node, term(), token);
+//                node = new ast.BinaryOperationNode(node, term(), token);
 //            }
 //            if (currentToken.tokenType == Lexer.TokenType.SHOW) {
 //                consume(currentToken.tokenType);
-//                node = new StatementNode(currentToken);
+//                node = new ast.StatementNode(currentToken);
 //            }
                 consume(currentToken.tokenType);
                 node = new BinaryOperationNode(node, term(), token);
