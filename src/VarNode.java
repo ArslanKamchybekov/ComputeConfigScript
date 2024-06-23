@@ -1,5 +1,3 @@
-package ast;
-
 public class VarNode extends ASTNode{
     Lexer.Token token;
     String name;

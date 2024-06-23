@@ -1,5 +1,3 @@
-package ast;
-
 public class DeclarationNode extends ASTNode{
     VarNode var;
     ASTNode expression;

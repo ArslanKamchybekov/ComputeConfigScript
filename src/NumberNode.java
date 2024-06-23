@@ -1,5 +1,3 @@
-package ast;
-
 public class NumberNode extends ASTNode {
     private final Lexer.Token numberToken;
     int value;
@@ -11,7 +9,7 @@ public class NumberNode extends ASTNode {
 
     @Override
     public String toString() {
-        return "ast.NumberNode{" + value + '}';
+        return "N{" + value + '}';
     }
 
     @Override

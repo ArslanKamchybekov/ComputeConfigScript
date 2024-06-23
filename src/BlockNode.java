@@ -1,5 +1,3 @@
-package ast;
-
 import java.util.List;
 
 public class BlockNode extends ASTNode{

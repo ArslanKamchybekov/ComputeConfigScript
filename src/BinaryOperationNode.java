@@ -1,5 +1,3 @@
-package ast;
-
 public class BinaryOperationNode extends ASTNode {
     ASTNode left, right;
     Lexer.Token operationToken;

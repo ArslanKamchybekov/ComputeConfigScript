@@ -1,5 +1,3 @@
-package ast;
-
 public class AssignNode extends ASTNode{
     VarNode left;
     ASTNode right;
@@ -11,6 +9,6 @@ public class AssignNode extends ASTNode{
 
     @Override
     public void print(String indent) {
-        System.out.println(indent + "Assign{" + left.name + "}");
+        System.out.println(indent + "={" + left.token.value + "}");
     }
 }

@@ -1,5 +1,3 @@
-import ast.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class Parser {
         List<ASTNode> statements = new ArrayList<>();
         while(currentToken != null){
             statements.add(statement());
-            if(currentToken.tokenType == Lexer.TokenType.SEMICOLON) consume(currentToken.tokenType);
+            if(currentToken != null && currentToken.tokenType == Lexer.TokenType.SEMICOLON) consume(currentToken.tokenType);
         }
         return new BlockNode(statements);
     }
@@ -63,16 +61,8 @@ public class Parser {
         ASTNode node = term();
         while (currentToken != null && (currentToken.tokenType == Lexer.TokenType.ADD || currentToken.tokenType == Lexer.TokenType.SUBTRACT)) {
             Lexer.Token token = currentToken;
-//            if (currentToken.tokenType == Lexer.TokenType.ADD || currentToken.tokenType == Lexer.TokenType.SUBTRACT) {
-//                consume(currentToken.tokenType);
-//                node = new ast.BinaryOperationNode(node, term(), token);
-//            }
-//            if (currentToken.tokenType == Lexer.TokenType.SHOW) {
-//                consume(currentToken.tokenType);
-//                node = new ast.StatementNode(currentToken);
-//            }
-                consume(currentToken.tokenType);
-                node = new BinaryOperationNode(node, term(), token);
+            consume(currentToken.tokenType);
+            node = new BinaryOperationNode(node, term(), token);
         }
         return node;
     }
@@ -90,7 +80,7 @@ public class Parser {
     private void consume(Lexer.TokenType type) {
         if(currentToken.tokenType == type) {
             current++;
-            if(current < tokens.size())currentToken = tokens.get(current);
+            if(current < tokens.size()) currentToken = tokens.get(current);
             else currentToken = null;
         } else throw new ParserException("Unsupported token: " + currentToken);
     }

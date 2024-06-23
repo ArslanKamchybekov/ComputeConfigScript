@@ -63,7 +63,7 @@ public class Lexer implements Iterable<Lexer.Token> {
                     current++;
                     break;
                 case '}':
-                    tokens.add(new Token(TokenType.RPAREN, "}"));
+                    tokens.add(new Token(TokenType.RBRACE, "}"));
                     current++;
                     break;
                 case ';':
@@ -82,6 +82,7 @@ public class Lexer implements Iterable<Lexer.Token> {
                     else if (isAlpha(c)) {
                         String identifier = readIdentifier();
                         tokens.add(new Token(deriveTokenType(identifier), identifier));
+                        break;
                     }else{
                         throw new LexerException("Unsupported character!");
                     }
@@ -154,15 +155,15 @@ public class Lexer implements Iterable<Lexer.Token> {
     }
 
     @Override
-    public Iterator<Token> iterator() {
+    public Iterator<Lexer.Token> iterator() {
         return tokens.iterator();
     }
 
     public class Token{
-        public final TokenType tokenType;
+        public final Lexer.TokenType tokenType;
         public final String value;
 
-        public Token(TokenType tokenType, String value) {
+        public Token(Lexer.TokenType tokenType, String value) {
             this.tokenType = tokenType;
             this.value = value;
         }
@@ -172,6 +173,7 @@ public class Lexer implements Iterable<Lexer.Token> {
             return "Token{" + "tokenType=" + tokenType + ", value='" + value + '\'' + '}';
         }
     }
+
     enum TokenType{
         CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, NUMBER, IDENTIFIER, REFERENCES, ASSIGN, LOOP, CONDITION,
         OPERATOR, ADD, SUBTRACT, MULTIPLY, DIVIDE, LPAREN, RPAREN, SEMICOLON, LBRACE, RBRACE, VAR

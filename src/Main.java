@@ -1,5 +1,3 @@
-import ast.ASTNode;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,11 @@ public class Main {
 //            System.out.println(token);
 //        }
         String input = """
-                3 + 5 * (10 - 4)
+                var x = 5;
+                {
+                x = 5-4;
+                var y = 12;
+                }
                 """;
         Lexer lexer = new Lexer(input);
         List<Lexer.Token> tokens = new ArrayList<>();
