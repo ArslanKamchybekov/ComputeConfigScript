@@ -8,7 +8,12 @@ public class DeclarationNode extends ASTNode{
     }
 
     @Override
+    public String toString() {
+        return "D{" + var + " = " + expression + '}';
+    }
+
+    @Override
     public void print(String indent) {
-        System.out.println(indent + "D{" + expression + "}");
+        System.out.println(indent + "D{" + var + " = " + expression + '}');
     }
 }

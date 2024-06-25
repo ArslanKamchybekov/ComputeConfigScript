@@ -9,6 +9,6 @@ public class AssignNode extends ASTNode{
 
     @Override
     public void print(String indent) {
-        System.out.println(indent + "={" + left.token.value + "}");
+        System.out.println(indent + "={" + right + "}");
     }
 }

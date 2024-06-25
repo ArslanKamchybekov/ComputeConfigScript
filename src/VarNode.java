@@ -8,6 +8,11 @@ public class VarNode extends ASTNode{
     }
 
     @Override
+    public String toString() {
+        return "Var{" + name + '}';
+    }
+
+    @Override
     public void print(String indent) {
         System.out.println("Var{" + name + "}");
     }

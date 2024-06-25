@@ -8,6 +8,11 @@ public class ConstNode extends ASTNode{
     }
 
     @Override
+    public String toString() {
+        return "Const{" + name + '}';
+    }
+
+    @Override
     public void print(String indent) {
         System.out.println("Const{" + name + "}");
     }

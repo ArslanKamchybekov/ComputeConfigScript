@@ -8,8 +8,13 @@ public class BinaryOperationNode extends ASTNode {
         this.operationToken = operationToken;
     }
 
+    @Override
+    public String toString() {
+        return "Op{" + left + " " + operationToken.value + " " + right + '}';
+    }
+
     public void print(String indent){
-        System.out.println(indent + "Op{" + operationToken.value + '}');
+        System.out.println(indent + "Op{" + left + " " + operationToken.value + " " + right + '}');
         left.print(indent + indent);
         right.print(indent + indent);
     }

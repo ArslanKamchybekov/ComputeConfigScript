@@ -26,7 +26,7 @@ public class Main {
                   x = 5-4;
                   var y = 12;
                 }
-                const z = 7;
+                const z = x + 1;
                 """;
         Lexer lexer = new Lexer(input);
         List<Lexer.Token> tokens = new ArrayList<>();
