@@ -9,6 +9,9 @@ public class BlockNode extends ASTNode{
 
     @Override
     public void print(String indent) {
-        for (ASTNode node: statements) node.print("  ");
+        for (ASTNode node : statements) {
+            System.out.print("  ");
+            node.print("");
+        }
     }
 }

@@ -23,9 +23,10 @@ public class Main {
         String input = """
                 var x = 5;
                 {
-                x = 5-4;
-                var y = 12;
+                  x = 5-4;
+                  var y = 12;
                 }
+                const z = 7;
                 """;
         Lexer lexer = new Lexer(input);
         List<Lexer.Token> tokens = new ArrayList<>();

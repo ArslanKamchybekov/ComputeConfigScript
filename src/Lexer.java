@@ -94,12 +94,13 @@ public class Lexer implements Iterable<Lexer.Token> {
         return switch (identifier) {
             case "config" -> TokenType.CONFIG;
             case "update" -> TokenType.UPDATE;
-            case "var" -> TokenType.VAR;
             case "configs" -> TokenType.CONFIGS;
             case "compute" -> TokenType.COMPUTE;
             case "show" -> TokenType.SHOW;
             case "loop", "from" -> TokenType.LOOP;
             case "if", "else" -> TokenType.CONDITION;
+            case "var" -> TokenType.VAR;
+            case "const" -> TokenType.CONST;
             default -> TokenType.IDENTIFIER;
         };
     }
@@ -176,6 +177,6 @@ public class Lexer implements Iterable<Lexer.Token> {
 
     enum TokenType{
         CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, NUMBER, IDENTIFIER, REFERENCES, ASSIGN, LOOP, CONDITION,
-        OPERATOR, ADD, SUBTRACT, MULTIPLY, DIVIDE, LPAREN, RPAREN, SEMICOLON, LBRACE, RBRACE, VAR
+        OPERATOR, ADD, SUBTRACT, MULTIPLY, DIVIDE, LPAREN, RPAREN, SEMICOLON, LBRACE, RBRACE, VAR, CONST
     }
 }

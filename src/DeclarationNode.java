@@ -1,8 +1,8 @@
 public class DeclarationNode extends ASTNode{
-    VarNode var;
+    ASTNode var;
     ASTNode expression;
 
-    public DeclarationNode(VarNode var, ASTNode expression) {
+    public DeclarationNode(ASTNode var, ASTNode expression) {
         this.var = var;
         this.expression = expression;
     }

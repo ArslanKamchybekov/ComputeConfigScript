@@ -23,7 +23,7 @@ public class Parser {
 
     private ASTNode statement() {
         if(currentToken.tokenType == Lexer.TokenType.LBRACE) return block();
-        if(currentToken.tokenType == Lexer.TokenType.VAR) return declaration();
+        if(currentToken.tokenType == Lexer.TokenType.VAR || currentToken.tokenType == Lexer.TokenType.CONST) return declaration();
         if(currentToken.tokenType == Lexer.TokenType.IDENTIFIER) return assignment();
         return expression();
     }
@@ -35,10 +35,24 @@ public class Parser {
     }
 
     private ASTNode declaration() {
-        consume(Lexer.TokenType.VAR);
-        VarNode var = var();
-        consume(Lexer.TokenType.ASSIGN);
-        return new DeclarationNode(var, expression());
+        if(currentToken != null && currentToken.tokenType == Lexer.TokenType.VAR) {
+            consume(Lexer.TokenType.VAR);
+            VarNode var = var();
+            consume(Lexer.TokenType.ASSIGN);
+            return new DeclarationNode(var, expression());
+        }
+        if(currentToken != null && currentToken.tokenType == Lexer.TokenType.CONST) {
+            consume(Lexer.TokenType.CONST);
+            ConstNode constant = constant();
+            consume(Lexer.TokenType.ASSIGN);
+            return new DeclarationNode(constant, expression());
+        }
+        return null;
+    }
+
+    private ConstNode constant(){
+        consume(Lexer.TokenType.IDENTIFIER);
+        return new ConstNode(currentToken);
     }
 
     private VarNode var() {
@@ -90,6 +104,10 @@ public class Parser {
         if (token.tokenType == Lexer.TokenType.NUMBER) {
             consume(Lexer.TokenType.NUMBER);
             return new NumberNode(token);
+        }
+        if(token.tokenType == Lexer.TokenType.IDENTIFIER){
+            consume(Lexer.TokenType.IDENTIFIER);
+            return new VarNode(token);
         }
         if (token.tokenType == Lexer.TokenType.LPAREN){
             consume(Lexer.TokenType.LPAREN);
