@@ -1,20 +1,19 @@
 public class DeclarationNode extends ASTNode{
-    ASTNode var;
+    String name;
     ASTNode expression;
 
-    public DeclarationNode(ASTNode var, ASTNode expression) {
-        this.var = var;
+    public DeclarationNode(String name, ASTNode expression) {
+        this.name = name;
         this.expression = expression;
     }
 
     @Override
     public String toString() {
-        return "D{" + var + " = " + expression + '}';
+        return "D{" + name + " = " + expression + '}';
     }
 
     @Override
     public void print(String indent) {
-        System.out.println(indent + "D{" + var + " = " + expression + '}');
+        System.out.println("D{" + name + " = " + expression + '}');
     }
-    //
 }

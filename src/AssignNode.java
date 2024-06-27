@@ -1,14 +1,19 @@
 public class AssignNode extends ASTNode{
-    VarNode left;
-    ASTNode right;
+    String name;
+    ASTNode expression;
 
-    public AssignNode(VarNode left, ASTNode right) {
-        this.left = left;
-        this.right = right;
+    public AssignNode(String name, ASTNode expression) {
+        this.name = name;
+        this.expression = expression;
+    }
+
+    @Override
+    public String toString() {
+        return "={" + name + " = " + expression + "}";
     }
 
     @Override
     public void print(String indent) {
-        System.out.println(indent + "={" + right + "}");
+        System.out.println("={" + name + " = " + expression + "}");
     }
 }

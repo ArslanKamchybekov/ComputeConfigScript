@@ -5,7 +5,6 @@ public class Parser {
     private final List<Lexer.Token> tokens;
     private int current;
     private Lexer.Token currentToken;
-    private final ArrayList<String> constants = new ArrayList<>();
 
     public Parser(List<Lexer.Token> tokens) {
         this.tokens = tokens;
@@ -30,11 +29,9 @@ public class Parser {
     }
 
     private ASTNode assignment() {
-        for(String constant: constants)
-            if(constant.equals(currentToken.value)) throw new SemanticAnalyzerException("Cannot reassign a constant!");
         VarNode var = var();
         consume(Lexer.TokenType.ASSIGN);
-        return new AssignNode(var, expression());
+        return new AssignNode(var.name, expression());
     }
 
     private ASTNode declaration() {
@@ -42,26 +39,27 @@ public class Parser {
             consume(Lexer.TokenType.VAR);
             VarNode var = var();
             consume(Lexer.TokenType.ASSIGN);
-            return new DeclarationNode(var, expression());
+            return new DeclarationNode(var.name, expression());
         }
         if(currentToken != null && currentToken.tokenType == Lexer.TokenType.CONST) {
             consume(Lexer.TokenType.CONST);
             ConstNode constant = constant();
             consume(Lexer.TokenType.ASSIGN);
-            return new DeclarationNode(constant, expression());
+            return new DeclarationNode(constant.name, expression());
         }
         return null;
     }
 
     private ConstNode constant(){
-        constants.add(currentToken.value);
+        Lexer.Token token = currentToken;
         consume(Lexer.TokenType.IDENTIFIER);
-        return new ConstNode(currentToken);
+        return new ConstNode(token);
     }
 
     private VarNode var() {
+        Lexer.Token token = currentToken;
         consume(Lexer.TokenType.IDENTIFIER);
-        return new VarNode(currentToken);
+        return new VarNode(token);
     }
 
     private ASTNode block() {

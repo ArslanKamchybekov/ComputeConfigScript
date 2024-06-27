@@ -25,16 +25,28 @@ public class Main {
                 {
                   x = 5-4;
                   var y = 12;
+                  var value = y + x;
+                  var multiply = x * y;
                 }
-                const z = x + 1;
+                var z = x + 1;
+                y = x + 3;
                 """;
+
+        //Lexer
         Lexer lexer = new Lexer(input);
         List<Lexer.Token> tokens = new ArrayList<>();
         for(Lexer.Token token: lexer){
             tokens.add(token);
         }
+
+        //Parser
         Parser parser = new Parser(tokens);
         ASTNode root = parser.parse();
         root.print("  ");
+
+        //Semantic Analyzer
+        SemanticAnalyzer analyzer = new SemanticAnalyzer();
+        analyzer.visit(root);
     }
 }
+// interpreter, add indents for blocks
