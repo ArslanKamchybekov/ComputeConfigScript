@@ -16,4 +16,5 @@ public class DeclarationNode extends ASTNode{
     public void print(String indent) {
         System.out.println(indent + "D{" + var + " = " + expression + '}');
     }
+    //
 }
