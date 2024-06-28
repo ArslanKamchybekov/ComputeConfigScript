@@ -14,6 +14,6 @@ public class VarNode extends ASTNode {
 
     @Override
     public void print(String indent) {
-        System.out.println("Var{" + name + "}");
+        System.out.println(indent + "Var{" + name + "}");
     }
 }

@@ -7,18 +7,18 @@ public class BlockNode extends ASTNode {
         this.statements = statements;
     }
 
-//    @Override
-//    public String toString() {
-//        return "BlockNode{" +
-//                "statements=" + statements +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Block{" +
+                "statements=" + statements +
+                '}';
+    }
 
     @Override
     public void print(String indent) {
-        for (ASTNode node : statements) {
-            System.out.print("");
-            node.print("");
-        }
+        System.out.println(indent + "Block{");
+        String newIndent = indent + "    ";
+        for (ASTNode node : statements) node.print(newIndent);
+        System.out.println(indent + "}");
     }
 }

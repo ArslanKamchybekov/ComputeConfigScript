@@ -14,6 +14,6 @@ public class NumberNode extends ASTNode {
 
     @Override
     public void print(String indent) {
-        System.out.println("N{" + value + '}');
+        System.out.println(indent + "N{" + value + '}');
     }
 }

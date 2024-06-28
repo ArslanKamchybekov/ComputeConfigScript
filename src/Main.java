@@ -28,7 +28,7 @@ public class Main {
         //Parser
         Parser parser = new Parser(tokens);
         ASTNode root = parser.parse();
-        root.print("  ");
+        root.print("");
 
         //Semantic Analyzer
         SemanticAnalyzer analyzer = new SemanticAnalyzer();

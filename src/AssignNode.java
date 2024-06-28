@@ -14,6 +14,6 @@ public class AssignNode extends ASTNode{
 
     @Override
     public void print(String indent) {
-        System.out.println("={" + name + " = " + expression + "}");
+        System.out.println(indent + "={" + name + " = " + expression + "}");
     }
 }
