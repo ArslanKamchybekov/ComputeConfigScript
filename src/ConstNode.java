@@ -1,4 +1,4 @@
-public class ConstNode extends ASTNode{
+public class ConstNode extends ASTNode {
     Lexer.Token token;
     String name;
 

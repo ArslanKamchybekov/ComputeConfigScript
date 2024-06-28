@@ -13,7 +13,7 @@ public class BinaryOperationNode extends ASTNode {
         return "Op{" + left + " " + operationToken.value + " " + right + '}';
     }
 
-    public void print(String indent){
+    public void print(String indent) {
         System.out.println("Op{" + left + " " + operationToken.value + " " + right + '}');
     }
 }

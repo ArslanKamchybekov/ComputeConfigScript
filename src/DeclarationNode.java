@@ -1,4 +1,4 @@
-public class DeclarationNode extends ASTNode{
+public class DeclarationNode extends ASTNode {
     String name;
     ASTNode expression;
 

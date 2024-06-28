@@ -5,7 +5,7 @@ import java.util.Stack;
 public class SemanticAnalyzer {
     private final Stack<Set<String>> scopes = new Stack<>();
 
-    void visit(ASTNode node){
+    void visit(ASTNode node) {
         switch (node) {
             case AssignNode assignNode -> {
                 if (!isDeclared(assignNode.name))
@@ -22,7 +22,7 @@ public class SemanticAnalyzer {
                 scopes.pop();
             }
             case ConstNode constNode -> {
-                // Handle ConstNode if necessary
+                //
             }
             case DeclarationNode declarationNode -> {
                 if (isDeclared(declarationNode.name)) {
@@ -46,7 +46,7 @@ public class SemanticAnalyzer {
     }
 
     private boolean isDeclared(String name) {
-        for(Set<String> scope: scopes) if(scope.contains(name)) return true;
+        for (Set<String> scope : scopes) if (scope.contains(name)) return true;
         return false;
     }
 }

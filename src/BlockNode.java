@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class BlockNode extends ASTNode{
+public class BlockNode extends ASTNode {
     List<ASTNode> statements;
 
     public BlockNode(List<ASTNode> statements) {

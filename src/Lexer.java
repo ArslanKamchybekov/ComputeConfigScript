@@ -175,7 +175,7 @@ public class Lexer implements Iterable<Lexer.Token> {
         }
     }
 
-    enum TokenType{
+    public enum TokenType{
         CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, NUMBER, IDENTIFIER, REFERENCES, ASSIGN, LOOP, CONDITION,
         OPERATOR, ADD, SUBTRACT, MULTIPLY, DIVIDE, LPAREN, RPAREN, SEMICOLON, LBRACE, RBRACE, VAR, CONST
     }
